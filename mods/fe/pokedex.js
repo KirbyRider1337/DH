@@ -2949,10 +2949,7 @@ exports.BattlePokedex = {
         num: 750050,
         species: "Suirizion",
         types: ["Grass", "Water"],
-        genderRatio: {
-            M: 0.0,
-            F: 0.0
-        },
+        gender: "N",
         baseStats: {
             hp: 104,
             atk: 82,
@@ -3213,10 +3210,7 @@ exports.BattlePokedex = {
         num: 750055,
         species: "Moltie",
         types: ["Fairy", "Fire"],
-        genderRatio: {
-            M: 0.0,
-            F: 0.0
-        },
+        gender: "N",
         baseStats: {
             hp: 90,
             atk: 100,
@@ -11067,7 +11061,7 @@ darkchomp: {
         color: "Brown",
         eggGroups: ["Field"],
     },
-    golisoptops: {
+    golisotops: {
         num: 7500227,
         species: "Golisotops",
         types: ["Bug", "Water"],
@@ -11092,7 +11086,7 @@ darkchomp: {
         eggGroups: ["Water 3"],
       dexentry: "It is theorized that Kabutops is a distant ancestor of Golisopod. With this theory known, a hypothetical specimen of an intermediate generation was created. It would seem that this generation was closer to our times than long back, as it has much of Golisopod's features. However, it remains having the two blades on its uppermost pair of arms.",
     },
-    pewearalola: {
+    perwearalola: {
         num: 7500228,
         species: "Perwear-Alola",
         types: ["Fighting", "Dark"],
