@@ -535,10 +535,10 @@ exports.BattleFormatsData = { //
         tier: "OU",
         requiredItem: "sablemimezite",
     },
-    aegilineshield: {
+    aegilene: {
         tier: "OU",
     },
-    aegilineblade: {
+    aegileneblade: {
         tier: "OU",
     },
     houndlion: {
@@ -708,7 +708,7 @@ exports.BattleFormatsData = { //
     golone: {
         tier: "LC",
     },
-    golislashdefense: {
+    golislash: {
         tier: "OU",
     },
     golislashpower: {
@@ -1587,7 +1587,7 @@ exports.BattleFormatsData = { //
     comcott: {
         tier: "OU",
     },
-    minislashmeteor: {
+    minislash: {
         tier: "OU",
     },
     minislashblade: {
@@ -1631,7 +1631,7 @@ exports.BattleFormatsData = { //
     decidactyl: {
         tier: "OU",
     },
-    decedactylmega: {
+    decidactylmega: {
         tier: "OU",
         requiredItem: "decedactylite",
     },
@@ -2078,7 +2078,7 @@ exports.BattleFormatsData = { //
     sylvoko: {
         tier: "OU",
     },
-    miniancieore: {
+    miniancie: {
         tier: "OU",
     },
     minianciemegaore: {
@@ -2088,7 +2088,7 @@ exports.BattleFormatsData = { //
     minianciejewel: {
         tier: "OU",
     },
-    minianciemegaore: {
+    minianciemegajewel: {
         tier: "Uber",
         requiredItem: "minianciejewelite",
     },
