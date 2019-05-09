@@ -26901,4 +26901,15 @@ auroritarmega: {
 		weightkg: 598,
 		eggGroups: ["Undiscovered"],
 	},
+	ninjaleo: {
+		num: 75000660,
+		types:["Bug", "Steel"],
+		species: "Ninjaleo",
+		baseStats: {hp: 99, atk: 133, def, 76, spa: 81, spd: 70, spe: 147},
+		abilities: {0: "Quicksilver"},
+		heightm: 2.1,
+		weightkg: 121,
+		fusion: ["Ninjask", "Solgaleo"],
+		eggGroups: ["Undiscovered"],
+	},
 };
