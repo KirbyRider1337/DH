@@ -31,9 +31,9 @@ exports.BattleAbilities = {
         desc: "This Pokemon's Psychic-type attacks are super-effective against Dark-types and its Fairy-type attacks are super-effective against Poison-types. Psychic-type attacks ignore the Dark-type's immunity.",
         shortDesc: "User's Psychic- and Fairy-type moves are SE against Dark and Poison, respectively, ignoring immunities if applicable.",
 		  onModifyMovePriority: -5,
-		  onModifyMove(move) {
+		  onModifyMove(move, source, target) {
 			  if (!move.ignoreImmunity) move.ignoreImmunity = {};
-			  if (move.ignoreImmunity !== true) {
+			  if (move.ignoreImmunity !== true && target.hasType('Dark')) {
 				  move.ignoreImmunity['Psychic'] = true;
 			  }
 		  },
@@ -283,7 +283,7 @@ exports.BattleAbilities = {
 			return typeMod;
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			if (move && move.type === 'Water') return 1;
+			if (move && move.type === 'Water') return (target.types[0] == type ? 1 : 0);
 			return typeMod;
 		}, /* I don't know how to force a 4x weakness so I'm going to do a pro gamer move */
 		onSourceModifyAtkPriority: 6,
@@ -307,18 +307,28 @@ exports.BattleAbilities = {
 		shortDesc: "Punching moves 1.5x power, sound moves Physical.",
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
-			if (move.flags['punch']) {
+			if (move.flags['sound']) {
 				this.debug('voiceless boost');
 				return this.chainModify(1.5);
 			}
-			if {move.flags['sound']) {
-				this.debug('voiceless category change');
-				if (move.category === 'Status') return;
+		},
+		onModifyMove(move) {
+			if (move.flags['sound'] && move.category !== 'Status') {
 				move.category = 'Physical';
-				/* idk how to remove flags from moves since i haven't seen any other ability that does it */
-			},
+				delete move.flags['sound'];
+			}
 		},
 		id: "voiceless",
 		name: "voiceless",
 	},
+    "baneoflight": {
+        desc: "This Pokemon's Dark-type attacks are super-effective against Fairy-types, and its Poison-type attacks are super-effective against Psychic-types.",
+        shortDesc: "User's Dark- and Poison-type moves are SE against Fairy and Psychic, respectively.",
+		  onSourceEffectiveness(typeMod, target, type, move) {
+			  if (move && ((type === 'Fairy' && move.type === 'Dark') || (type === 'Psychic' && move.type === 'Poison'))) return 1;
+			  return typeMod;
+		  },
+        id: "baneoflight",
+        name: "Bane of Light",
+    },
 };
