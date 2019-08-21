@@ -735,6 +735,7 @@ let BattleMovedex = {
 		contestType: "Cool",
 	},
 	"spearoflight": {
+		num: 40027,
 		accuracy: true,
 		basePower: 150,
 		category: "Special",
@@ -753,6 +754,7 @@ let BattleMovedex = {
 		contestType: "Beautiful",
 	},
 	"demonicrend": {
+		num: 40028,
 		accuracy: 100,
 		basePower: 110,
 		category: "Physical",
@@ -776,9 +778,10 @@ let BattleMovedex = {
 		contestType: "Tough",
 	},
 	"hammerofdarkness": {
+		num: 40029,
 		accuracy: true,
 		basePower: 195,
-		category: "Special",
+		category: "Physical",
 		desc: "Has a 100% chance to lower the target's Speed by 1 stage.",
 		shortDesc: "100% chance to lower the target's Speed by 1.",
 		id: "hammerofdarkness",
