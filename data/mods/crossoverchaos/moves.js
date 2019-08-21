@@ -454,7 +454,7 @@ let BattleMovedex = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		self: {
+		selfBoost: {
 			boosts: {
 				def: -1,
 				spe: -1,
@@ -720,8 +720,12 @@ let BattleMovedex = {
 				if (type === 'Ground') return false;
 			},
 			onResidualOrder: 15,
+			onResidual(pokemon) {
+				if (!pokemon.hp) return;
+				pokemon.removeVolatile('cycloneslash');
+			},
 			onEnd(target) {
-				this.add('-end', target, 'Magnet Rise');
+				this.add('-end', target, 'Cyclone Slash');
 			},
 		},
 		secondary: null,
@@ -729,6 +733,69 @@ let BattleMovedex = {
 		type: "Steel",
 		zMovePower: 140,
 		contestType: "Cool",
+	},
+	"spearoflight": {
+		accuracy: true,
+		basePower: 150,
+		category: "Special",
+		desc: "This move is always a critical hit unless the target is under the effect of Lucky Chant or has the Battle Armor or Shell Armor Abilities.",
+		shortDesc: "Always results in a critical hit.",
+		id: "spearoflight",
+		name: "Spear of Light",
+		pp: 1,
+		priority: 0,
+		flags: {},
+		isZ: "galeemiumz",
+		willCrit: true,
+		secondary: null,
+		target: "normal",
+		type: "Fairy",
+		contestType: "Beautiful",
+	},
+	"demonicrend": {
+		accuracy: 100,
+		basePower: 110,
+		category: "Physical",
+		desc: "Has a 40% chance to lower each target's Speed by 1 stage.",
+		shortDesc: "40% chance to lower each target's Speed by 1.",
+		id: "demonicrend",
+		isViable: true,
+		name: "Demonic Rend",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1},
+		secondary: {
+			chance: 40,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Dark",
+		zMovePower: 185,
+		contestType: "Tough",
+	},
+	"hammerofdarkness": {
+		accuracy: true,
+		basePower: 195,
+		category: "Special",
+		desc: "Has a 100% chance to lower the target's Speed by 1 stage.",
+		shortDesc: "100% chance to lower the target's Speed by 1.",
+		id: "hammerofdarkness",
+		name: "Hammer of Darkness",
+		pp: 1,
+		priority: 0,
+		flags: {contact: 1},
+		isZ: "dharkoniumz",
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "normal",
+		type: "Dark",
+		contestType: "Tough",
 	},
 	"suicideride": {
 		num: 50001,
@@ -793,7 +860,7 @@ let BattleMovedex = {
 		zMovePower: 190,
 		contestType: "Beautiful",
 	},
-	"meettheflinstones": {
+	"meettheflintstones": {
 		num: 50004,
 		accuracy: 100,
 		basePower: 95,
