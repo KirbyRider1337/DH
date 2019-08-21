@@ -1,7 +1,7 @@
 'use strict';
 exports.BattleAbilities = {
     "karmicretribution": {
-        desc: "This Pokemon's damaging moves become multi-hit moves that hit four times. The second hit has its damage quartered. Does not affect moves that have multiple targets or moves that use the target's attacking stats instead of the user's.",
+        desc: "This Pokemon's damaging moves become multi-hit moves that hit four times. Does not affect moves that have multiple targets or moves that use the target's attacking stats instead of the user's.",
         shortDesc: "This Pokemon's damaging moves hit four times (not Foul Play).",
         onPrepareHit(source, target, move) {
             if (['iceball', 'rollout'].includes(move.id) || move.useTargetOffensive || move.useSourceDefensive) return;
@@ -283,7 +283,7 @@ exports.BattleAbilities = {
 			return typeMod;
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			if (move && move.type === 'Water') return (target.types[0] == type ? 1 : 0);
+			if (move && move.type === 'Water') return (target.types[0] === type ? 1 : 0);
 			return typeMod;
 		}, /* I don't know how to force a 4x weakness so I'm going to do a pro gamer move */
 		onSourceModifyAtkPriority: 6,
@@ -331,4 +331,130 @@ exports.BattleAbilities = {
         id: "baneoflight",
         name: "Bane of Light",
     },
+    "fourofakind": {
+        desc: "This Pokemon's damaging moves become multi-hit moves that hit four times. Does not affect moves that have multiple targets or moves that use the target's attacking stats instead of the user's.",
+        shortDesc: "This Pokemon's damaging moves hit four times, but have x0.25 power and halved secondary chances.",
+			onModifyMovePriority: -2,
+			onModifyMove(move) {
+				if (move.secondaries && move.multihitType === 'parentalbond') {
+					this.debug('halving secondary chance');
+					for (const secondary of move.secondaries) {
+						if (secondary.chance) secondary.chance /= 2;
+					}
+				}
+			},
+        onPrepareHit(source, target, move) {
+            if (['iceball', 'rollout'].includes(move.id)) return;
+            if (move.category !== 'Status' && !move.selfdestruct && !move.multihit && !move.flags['charge'] && !move.spreadHit && !move.isZ) {
+                move.multihit = 4;
+                move.multihitType = 'parentalbond';
+					 if (move.secondaries) {
+						this.debug('halving secondary chance');
+						for (const secondary of move.secondaries) {
+							if (secondary.chance) secondary.chance /= 2;
+						}
+					 }
+            }
+        },
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.multihitType === 'parentalbond') return this.chainModify(0.25);
+		},
+        onSourceModifySecondaries(secondaries, target, source, move) {
+            if (move.multihitType === 'parentalbond' && move.id === 'secretpower' && move.hit < 4) {
+                // hack to prevent accidentally suppressing King's Rock/Razor Fang
+                return secondaries.filter(effect => effect.volatileStatus === 'flinch');
+            }
+        },
+        id: "fourofakind",
+        name: "Four of a Kind",
+    },
+    "fourheads": {
+        desc: "This Pokemon's damaging moves become multi-hit moves that hit four times. Does not affect moves that have multiple targets or moves that use the target's attacking stats instead of the user's.",
+        shortDesc: "This Pokemon's damaging moves hit four times, but have x0.3 power and halved secondary chances.",
+			onModifyMovePriority: -2,
+			onModifyMove(move) {
+				if (move.secondaries && move.multihitType === 'fourheads') {
+					this.debug('halving secondary chance');
+					for (const secondary of move.secondaries) {
+						if (secondary.chance) secondary.chance /= 2;
+					}
+				}
+			},
+        onPrepareHit(source, target, move) {
+            if (['iceball', 'rollout'].includes(move.id)) return;
+            if (move.category !== 'Status' && !move.selfdestruct && !move.multihit && !move.flags['charge'] && !move.spreadHit && !move.isZ) {
+                move.multihit = 4;
+                move.multihitType = 'fourheads';
+					 if (move.secondaries) {
+						this.debug('halving secondary chance');
+						for (const secondary of move.secondaries) {
+							if (secondary.chance) secondary.chance /= 2;
+						}
+					 }
+            }
+        },
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.multihitType === 'fourheads') return this.chainModify(0.3);
+		},
+        onSourceModifySecondaries(secondaries, target, source, move) {
+            if (move.multihitType === 'fourheads' && move.id === 'secretpower' && move.hit < 4) {
+                // hack to prevent accidentally suppressing King's Rock/Razor Fang
+                return secondaries.filter(effect => effect.volatileStatus === 'flinch');
+            }
+        },
+        id: "fourheads",
+        name: "Four Heads",
+    },
+	"mummy": {
+		desc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy. Does not affect the Battle Bond, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, and Zen Mode Abilities.",
+		shortDesc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy.",
+		id: "mummy",
+		name: "Mummy",
+		onAfterDamage(damage, target, source, move) {
+			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
+				let oldAbility = source.setAbility('mummy', target);
+				if (oldAbility) {
+					this.add('-activate', target, 'ability: Mummy', this.getAbility(oldAbility).name, '[of] ' + source);
+				}
+			}
+		},
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.multihitType === 'parentalbond' && move.hit > 1) return this.chainModify(0.25);
+			if (move.multihitType === 'fourheads' && move.hit > 1) return this.chainModify(0.3);
+		},
+		rating: 2.5,
+		num: 152,
+	},
+	"abilitytodestroyanything": {
+		shortDesc: "Sniper + Sheer Force + Super Luck + This Pokemon's moves that would otherwise lack recoil now deal 25% of damage dealt back to the user.",
+		onModifyMove(move, pokemon) {
+			if (move.secondaries) {
+				delete move.secondaries;
+				// Technically not a secondary effect, but it is negated
+				if (move.id === 'clangoroussoulblaze') delete move.selfBoost;
+				// Actual negation of `AfterMoveSecondary` effects implemented in scripts.js
+				move.hasSheerForce = true;
+			}
+			if (!move.recoil){
+				move.recoil = [1, 4];
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.hasSheerForce) return this.chainModify([0x14CD, 0x1000]);
+		},
+		onModifyDamage(damage, source, target, move) {
+			if (target.getMoveHitData(move).crit) {
+				this.debug('Sniper boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyCritRatio(critRatio) {
+			return critRatio + 1;
+		},
+		id: "abilitytodestroyanything",
+		name: "Ability to Destroy Anything",
+	},
 };
