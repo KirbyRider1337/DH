@@ -74,12 +74,20 @@ let BattleMovedex = {
 			basePower: 80,
 			category: "Special",
 			desc: "The target's Ability is rendered ineffective as long as it remains active. If the target uses Baton Pass, the replacement will remain under this effect. If the target's Ability is Battle Bond, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, or Zen Mode, this effect does not happen, and receiving the effect through Baton Pass ends the effect immediately.",
-			shortDesc: "Nullifies the target's Ability.",
+			shortDesc: "Nullifies the target's Ability. Damages user for 25% of HP if not Shulk or Chibiterasu.",
 			id: "monadopurge",
 			name: "Monado Purge",
 			pp: 15,
 			priority: 0,
 			flags: {protect: 1, mirror: 1},
+			mindBlownRecoil: true,
+			onAfterMove(pokemon, target, move) {
+				if (['Shulk', 'Chibiterasu'].includes(pokemon.template.species)){
+					 move.mindBlownRecoil = false;
+				} else if (move.mindBlownRecoil && !move.multihit) {
+					this.damage(Math.round(pokemon.maxhp / 4), pokemon, pokemon, this.getEffect('Monado Purge'), true);
+				}
+			},
 			volatileStatus: 'gastroacid',
 			secondary: null,
 			target: "normal",
@@ -103,6 +111,18 @@ let BattleMovedex = {
 			pp: 5,
 			priority: 0,
 			flags: {protect: 1, mirror: 1},
+			mindBlownRecoil: true,
+			onHit(target) {
+				target.clearBoosts();
+				this.add('-clearboost', target);
+			},
+			onAfterMove(pokemon, target, move) {
+				if (['Shulk', 'Chibiterasu'].includes(pokemon.template.species)){
+					 move.mindBlownRecoil = false;
+				} else if (move.mindBlownRecoil && !move.multihit) {
+					this.damage(Math.round(pokemon.maxhp / 4), pokemon, pokemon, this.getEffect('Monado Eater'), true);
+				}
+			},
 			secondary: null,
 			target: "normal",
 			type: "Fighting",
@@ -799,6 +819,27 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 		contestType: "Tough",
+	},
+	"finaldeathbloom": {
+		num: 40030,
+		accuracy: 90,
+		basePower: 140,
+		category: "Special",
+		desc: "If the target lost HP, the user takes recoil damage equal to 1/2 the HP lost by the target, rounded half up, but not less than 1 HP.",
+		shortDesc: "Has 1/2 recoil.",
+		id: "finaldeathbloom",
+		isViable: true,
+		name: "Final Death Bloom",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		isUnreleased: true,
+		recoil: [1, 2],
+		secondary: null,
+		target: "normal",
+		type: "Grass",
+		zMovePower: 200,
+		contestType: "Beautiful",
 	},
 	"suicideride": {
 		num: 50001,
