@@ -665,7 +665,7 @@ let BattleMovedex = {
 		name: "Dedede Hammer Throw",
 		pp: 15,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {protect: 1, mirror: 1},
 		secondary: {
 			chance: 10,
 			status: 'brn',
@@ -688,7 +688,7 @@ let BattleMovedex = {
 		name: "Battle Rifle",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1, mirror: 1},
+		flags: {bullet: 1, protect: 1, mirror: 1},
 		multihit: 3,
 		secondary: null,
 		target: "normal",
