@@ -169,7 +169,7 @@ exports.BattleAbilities = {
 		name: "Crystal Barrier",
 	},
 	"powershield": {
-		shortDesc: "This Pokemon's moves of over 90 base power have 90 base power instead.",
+		shortDesc: "Incoming moves of over 90 base power have 90 base power instead.",
 		onBasePowerPriority: 8,
 		onSourceBasePower(basePower, attacker, defender, move) {
 			if (basePower > 90) {
