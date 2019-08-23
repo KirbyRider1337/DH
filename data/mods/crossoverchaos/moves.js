@@ -451,7 +451,7 @@ let BattleMovedex = {
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
-			if (['', 'slp', 'frz'].includes(pokemon.status)) return false;
+			if (['', 'slp', 'frz'].includes(pokemon.status) && pokemon.hp >= pokemon.maxhp) return false;
 			pokemon.cureStatus();
 		},
 		heal: [1, 2],
