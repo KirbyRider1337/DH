@@ -457,4 +457,23 @@ exports.BattleAbilities = {
 		id: "abilitytodestroyanything",
 		name: "Ability to Destroy Anything",
 	},
+	"miner": {
+		shortDesc: "This Pokemon's attacking stat is multiplied by 1.5 while using a Rock-type attack.",
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Rock') {
+				this.debug('Miner boost (except not really because x1.5 multiplier)');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Rock') {
+				this.debug('Miner boost (except not really because x1.5 multiplier)');
+				return this.chainModify(1.5);
+			}
+		},
+		id: "miner",
+		name: "Miner",
+	},
 };
