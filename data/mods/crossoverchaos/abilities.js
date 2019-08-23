@@ -276,51 +276,6 @@ exports.BattleAbilities = {
 		id: "powerofsummer",
 		name: "Power of Summer",
 	},
-	"cursed": {
-		shortDesc: "This Pokemon hits Fairy super-effectively with Dark moves, but is weak to Water and takes an additional 2x damage.",
-		onSourceEffectiveness(typeMod, target, type, move) {
-			if (move && ((type === 'Fairy' && move.type === 'Dark'))) return 1;
-			return typeMod;
-		},
-		onEffectiveness(typeMod, target, type, move) {
-			if (move && move.type === 'Water') return (target.types[0] === type ? 1 : 0);
-			return typeMod;
-		}, /* I don't know how to force a 4x weakness so I'm going to do a pro gamer move */
-		onSourceModifyAtkPriority: 6,
-		onSourceModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Water') {
-				this.debug('Cursed strengthen');
-				return this.chainModify(2);
-			}
-		},
-		onSourceModifySpAPriority: 5,
-		onSourceModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Water') {
-				this.debug('Cursed strengthen');
-				return this.chainModify(2);
-			}
-		},
-		id: "cursed",
-		name: "Cursed",
-    },
-	"voiceless": {
-		shortDesc: "Punching moves 1.5x power, sound moves Physical.",
-		onBasePowerPriority: 8,
-		onBasePower(basePower, attacker, defender, move) {
-			if (move.flags['sound']) {
-				this.debug('voiceless boost');
-				return this.chainModify(1.5);
-			}
-		},
-		onModifyMove(move) {
-			if (move.flags['sound'] && move.category !== 'Status') {
-				move.category = 'Physical';
-				delete move.flags['sound'];
-			}
-		},
-		id: "voiceless",
-		name: "voiceless",
-	},
     "baneoflight": {
         desc: "This Pokemon's Dark-type attacks are super-effective against Fairy-types, and its Poison-type attacks are super-effective against Psychic-types.",
         shortDesc: "User's Dark- and Poison-type moves are SE against Fairy and Psychic, respectively.",
@@ -475,5 +430,73 @@ exports.BattleAbilities = {
 		},
 		id: "miner",
 		name: "Miner",
+	},
+	
+	"damp": {
+		desc: "While this Pokemon is active, Explosion, Mind Blown, Self-Destruct, and the Aftermath Ability are prevented from having an effect.",
+		shortDesc: "Prevents Explosion/Mind Blown/Self-Destruct/Creeper Blast/Aftermath while this Pokemon is active.",
+		id: "damp",
+		onAnyTryMove(target, source, effect) {
+			if (['explosion', 'mindblown', 'selfdestruct', 'creeperblast'].includes(effect.id)) {
+				this.attrLastMove('[still]');
+				this.add('cant', this.effectData.target, 'ability: Damp', effect, '[of] ' + target);
+				return false;
+			}
+		},
+		onAnyDamage(damage, target, source, effect) {
+			if (effect && effect.id === 'aftermath') {
+				return false;
+			}
+		},
+		name: "Damp",
+		rating: 1,
+		num: 6,
+	},
+	//Expanded abilities start here.
+	
+	"cursed": {
+		shortDesc: "This Pokemon hits Fairy super-effectively with Dark moves, but is weak to Water and takes an additional 2x damage.",
+		onSourceEffectiveness(typeMod, target, type, move) {
+			if (move && ((type === 'Fairy' && move.type === 'Dark'))) return 1;
+			return typeMod;
+		},
+		onEffectiveness(typeMod, target, type, move) {
+			if (move && move.type === 'Water') return (target.types[0] === type ? 1 : 0);
+			return typeMod;
+		}, /* I don't know how to force a 4x weakness so I'm going to do a pro gamer move */
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				this.debug('Cursed strengthen');
+				return this.chainModify(2);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				this.debug('Cursed strengthen');
+				return this.chainModify(2);
+			}
+		},
+		id: "cursed",
+		name: "Cursed",
+    },
+	"voiceless": {
+		shortDesc: "Punching moves 1.5x power, sound moves Physical.",
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['sound']) {
+				this.debug('voiceless boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyMove(move) {
+			if (move.flags['sound'] && move.category !== 'Status') {
+				move.category = 'Physical';
+				delete move.flags['sound'];
+			}
+		},
+		id: "voiceless",
+		name: "voiceless",
 	},
 };
