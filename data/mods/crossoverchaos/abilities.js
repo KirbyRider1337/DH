@@ -362,26 +362,6 @@ exports.BattleAbilities = {
         id: "fourheads",
         name: "Four Heads",
     },
-	"mummy": {
-		desc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy. Does not affect the Battle Bond, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, and Zen Mode Abilities.",
-		shortDesc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy.",
-		id: "mummy",
-		name: "Mummy",
-		onAfterDamage(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
-				let oldAbility = source.setAbility('mummy', target);
-				if (oldAbility) {
-					this.add('-activate', target, 'ability: Mummy', this.getAbility(oldAbility).name, '[of] ' + source);
-				}
-			}
-		},
-		onBasePower(basePower, pokemon, target, move) {
-			if (move.multihitType === 'parentalbond' && move.hit > 1) return this.chainModify(0.25);
-			if (move.multihitType === 'fourheads' && move.hit > 1) return this.chainModify(0.3);
-		},
-		rating: 2.5,
-		num: 152,
-	},
 	"abilitytodestroyanything": {
 		shortDesc: "Sniper + Sheer Force + Super Luck + This Pokemon's moves that would otherwise lack recoil now deal 25% of damage dealt back to the user.",
 		onModifyMove(move, pokemon) {
@@ -444,7 +424,36 @@ exports.BattleAbilities = {
 		id: "noncorporeal",
 		name: "Noncorporeal",
 	},
+	"kalibersfury": {
+		shortDesc: "Any attacks with 60 bp or less get a +1 to priority.",
+		onModifyPriority: function(priority, pokemon, target, move, basePower) {
+			if (move.category !== 'Status' && move.basePower <= 60) return priority + 1;
+		},
+		id: "kalibersfury",
+		name: "Kaliber's Fury",
+	},
 	
+	
+	"mummy": {
+		desc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy. Does not affect the Battle Bond, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, and Zen Mode Abilities.",
+		shortDesc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy.",
+		id: "mummy",
+		name: "Mummy",
+		onAfterDamage(damage, target, source, move) {
+			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
+				let oldAbility = source.setAbility('mummy', target);
+				if (oldAbility) {
+					this.add('-activate', target, 'ability: Mummy', this.getAbility(oldAbility).name, '[of] ' + source);
+				}
+			}
+		},
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.multihitType === 'parentalbond' && move.hit > 1) return this.chainModify(0.25);
+			if (move.multihitType === 'fourheads' && move.hit > 1) return this.chainModify(0.3);
+		},
+		rating: 2.5,
+		num: 152,
+	},
 	"damp": {
 		desc: "While this Pokemon is active, Explosion, Mind Blown, Self-Destruct, and the Aftermath Ability are prevented from having an effect.",
 		shortDesc: "Prevents Explosion/Mind Blown/Self-Destruct/Creeper Blast/Aftermath while this Pokemon is active.",
