@@ -1666,8 +1666,8 @@ cirno: {
 	 gender: "F",
     baseStats: {hp: 99, atk: 99, def: 99, spa: 99, spd: 99, spe: 99},
     abilities: {0: "Snow Warning", 1: "Levitate", H: "Freeze Atmosphere"},
-	 heightm: 1.3,
-    weightkg: 30,
+	 heightm: 1.4,
+    weightkg: 38,
 	 otherFormes: ["cirnotanned"],
 },
 cirnotanned: {
@@ -1680,8 +1680,8 @@ cirnotanned: {
 	 gender: "F",
     baseStats: {hp: 99, atk: 99, def: 99, spa: 99, spd: 99, spe: 99},
     abilities: {0: "Power of Summer"},
-	 heightm: 1.3,
-    weightkg: 30,
+	 heightm: 1.4,
+    weightkg: 38,
 },
 monokuma: {
     num: 6000094,
@@ -1764,7 +1764,7 @@ kyoko: {
 	 gender: "F",
     baseStats: {hp: 90, atk: 50, def: 60, spa: 60, spd: 60, spe: 50},
     abilities: {0: "Crystal Barrier"},
-	 heightm: 1.8,
+	 heightm: 1.7,
     weightkg: 55,
 },
 steve: {
