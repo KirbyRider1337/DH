@@ -2430,7 +2430,7 @@ sakinikaido: {
 majinbuu: {
     num: 7000025,
     species: "Majin Buu", /* Dragon Ball */
-    types: ["Dark", "Ghost"],
+    types: ["Fairy", "Fighting"],
 	 gender: "M",
     baseStats: {hp: 160, atk: 105, def: 50, spa: 115, spd: 100, spe: 100},
     abilities: {0: "Regenerator", 1: "Magic Bounce", H: "Gluttony"},
