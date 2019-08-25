@@ -458,6 +458,7 @@ stardream: {
     abilities: {0: "Levitate", H: "Soul-Heart"},
 	 heightm: 20,
     weightkg: 250,
+		color: "Gray",
 	 otherFormes: ["stardreamaccessark", "stardreamclockworkstar", "stardreamsoulos", "stardreamsoulosaccessark", "stardreamsoulosclockworkstar", "stardreamsoulosheart"],
 },
 stardreamaccessark: {
@@ -472,6 +473,7 @@ stardreamaccessark: {
     abilities: {0: "Levitate", H: "Soul-Heart"},
 	 heightm: 12700000,
     weightkg: 999.9,
+		color: "Gray",
 },
 stardreamclockworkstar: {
     num: 6000015,
@@ -485,6 +487,7 @@ stardreamclockworkstar: {
     abilities: {0: "Levitate", H: "Soul-Heart"},
 	 heightm: 12700000,
     weightkg: 999.9,
+		color: "Gray",
 },
 stardreamsoulos: {
     num: 6000015,
@@ -498,6 +501,7 @@ stardreamsoulos: {
     abilities: {0: "Soul 0 System"},
 	 heightm: 20,
     weightkg: 250,
+		color: "Black",
 },
 stardreamsoulosaccessark: {
     num: 6000015,
@@ -511,6 +515,7 @@ stardreamsoulosaccessark: {
     abilities: {0: "Soul 0 System"},
 	 heightm: 12700000,
     weightkg: 999.9,
+		color: "Gray",
 },
 stardreamsoulosclockworkstar: {
     num: 6000015,
@@ -524,6 +529,7 @@ stardreamsoulosclockworkstar: {
     abilities: {0: "Soul 0 System"},
 	 heightm: 12700000,
     weightkg: 999.9,
+		color: "Yellow",
 },
 stardreamsoulosheart: {
     num: 6000015,
@@ -537,6 +543,7 @@ stardreamsoulosheart: {
     abilities: {0: "Soul 0 System"},
 	 heightm: 0.5,
     weightkg: 25,
+		color: "Pink",
 },
 daroach: {
     num: 6000016,
