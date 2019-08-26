@@ -472,6 +472,38 @@ exports.BattleAbilities = {
 		id: "moonstruckblossom",
 		name: "Moonstruck Blossom",
 	},
+	"soul0system": {
+		desc: "This Pokemon is immune to Ghost. If this Pokemon is Star Dream Soul 0S's Clockwork Star forme, a situation that would cause it to faint instead forme-changes it into Star Dream Soul 0S-Heart, restoring back to full HP. This Pokemon's Psychic-type moves become Ghost-type moves and have their power multiplied by 1.2. This effect comes after other effects that change a move's type, but before Electrify's effects.",
+		shortDesc: "This Pokemon's Psychic-type moves become Ghost type and have 1.2x power. This Pokemon is immune to Ghost. If Star Dream Soul 0S-Clockwork Star, becomes Star Dream Soul 0S-Heart when it would faint and restores to full HP.",
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Ghost') {
+				this.add('-immune', target, '[from] ability: Soul 0 System');
+				return null;
+			}
+		},
+		onDamagePriority: -100,
+		onDamage(damage, target, source, effect) {
+			if (damage >= target.hp && target.template.speciesid === 'stardreamsoulosclockworkstar') {
+				this.damage(target.hp - 1, target, target);
+				target.formeChange('Star Dream-Soul OS-Heart', this.effect, false, '[msg]');
+				this.heal(target.maxhp);
+				return null;
+			}
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move, pokemon) {
+			if (move.type === 'Psychic' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Ghost';
+				move.soul0SBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.soul0SBoosted) return this.chainModify([0x1333, 0x1000]);
+		},
+		id: "soul0system",
+		name: "Soul 0 System",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
