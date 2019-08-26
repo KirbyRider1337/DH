@@ -432,7 +432,27 @@ exports.BattleAbilities = {
 		id: "kalibersfury",
 		name: "Kaliber's Fury",
 	},
+	"unsteadyhood": {
+		desc: "If this Pokemon is Hyness, the first hit taken in battle deals halved damage and causes a forme-change into Unhooded Hyness. Confusion damage also breaks the disguise.",
+		shortDesc: "If this Pokemon is Hyness, the first hit taken in battle deals halved damage and causes a forme-change into Hyness-Unhooded.",
+		onDamagePriority: 1,
+		onDamage(damage, target, source, effect) {
+			if (effect && effect.effectType === 'Move' && target.template.speciesid === 'hyness' && !target.transformed) {
+				this.add('-activate', target, 'ability: Unsteady Hood');
+				this.effectData.busted = true;
+				return damage / 2;
+			}
+		},
+		onUpdate(pokemon) {
+			if (pokemon.template.speciesid === 'hyness' && this.effectData.busted) {
+				pokemon.formeChange('Hyness-Unhooded', this.effect, true);
+			}
+		},
+		id: "unsteadyhood",
+		name: "Unsteady Hood",
+	},
 	
+	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
 	"mummy": {
 		desc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy. Does not affect the Battle Bond, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, and Zen Mode Abilities.",
