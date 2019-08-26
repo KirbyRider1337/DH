@@ -451,6 +451,27 @@ exports.BattleAbilities = {
 		id: "unsteadyhood",
 		name: "Unsteady Hood",
 	},
+	"moonstruckblossom": {
+		desc: "This Pokemon's moon-based moves have their power multiplied by 1.5. Moonlight now restores 1.5x more HP. If this Pokemon is a Grass-type, then the weaknesses of said type are negated.",
+		shortDesc: "x1.5 power to Moon moves; Moonlight heals 1.5x more HP to the user; Weaknesses from the Grass type are negated.",
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (['moonblast', 'moongeistbeam', 'menacingmoonrazemaelstrom'].includes(move.id)) {
+				return this.chainModify(1.5);
+			}
+		},
+		onSourceTryHeal(damage, target, source, effect) {
+			this.debug("Heal is occurring: " + target + " <- " + source + " :: " + effect.id);
+			if (effect.id === 'moonlight') {
+				return damage * 1.5;
+			}
+		},
+		onEffectiveness(typeMod, target, type, move) {
+			if (move && type === 'Grass' && typeMod > 0) return 0;
+		},
+		id: "moonstruckblossom",
+		name: "Moonstruck Blossom",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
