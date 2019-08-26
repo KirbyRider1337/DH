@@ -549,6 +549,35 @@ exports.BattleAbilities = {
 		id: "lastditcheffort",
 		name: "Last-Ditch Effort",
 	},
+	"eternalbeauty": {
+		desc: "This Pokemon's attacking stat is multiplied by 1.5 while using a Grass- or Fairy-type attack. If this Pokemon is Soul of Sectonia, she changes forme and unroots herself if she has 1/2 or less of her maximum HP, and changes to Meteor Form if it has more than 1/2 its maximum HP. This check is done on switch-in and at the end of each turn. While in its Meteor Form, it cannot become affected by major status conditions. Moongeist Beam, Sunsteel Strike, and the Mold Breaker, Teravolt, and Turboblaze Abilities cannot ignore this Ability.",
+		shortDesc: "This Pokemon's attacking stat is multiplied by 1.5 while using a Grass- or Fairy-type attack. If Sectonia-Soul, end of turn changes to Soul-Unrooted at 1/2 max HP or less.",
+		onResidualOrder: 27,
+		onResidual(pokemon) {
+			if (pokemon.baseTemplate.baseSpecies !== 'Sectonia' || pokemon.transformed || !pokemon.hp) return;
+			if (pokemon.hp <= pokemon.maxhp / 2) {
+				if (pokemon.template.speciesid === 'sectoniasoul') {
+					pokemon.formeChange('Sectonia-Soul-Unrooted');
+				}
+			}
+		},
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Grass' || move.type === 'Fairy') {
+				this.debug('Eternal Beauty boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Grass' || move.type === 'Fairy') {
+				this.debug('Eternal Beauty boost');
+				return this.chainModify(1.5);
+			}
+		},
+		id: "eternalbeauty",
+		name: "Eternal Beauty",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
