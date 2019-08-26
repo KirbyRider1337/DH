@@ -504,6 +504,36 @@ exports.BattleAbilities = {
 		id: "soul0system",
 		name: "Soul 0 System",
 	},
+	"shadesoul": {
+		desc: "If this Pokemon is The Knight, a situation that would cause it to faint instead forme-changes it into The Knight-Shade.",
+		shortDesc: "If The Knight, becomes The Knight-Shade it would otherwise faint and restores to full HP.",
+		onDamagePriority: -100,
+		onDamage(damage, target, source, effect) {
+			if (damage >= target.hp && target.template.speciesid === 'theknight') {
+				this.damage(target.hp - 1, target, target);
+				target.formeChange('The Knight-Shade', this.effect, false, '[msg]');
+				this.heal(target.maxhp);
+				return null;
+			}
+		},
+		id: "shadesoul",
+		name: "Shade Soul",
+	},
+	"physicalbreakdown": {
+		desc: "If this Pokemon is the Chaos Kin, a situation that would cause it to faint instead forme-changes it into its ashen forme.",
+		shortDesc: "If Chaos Kin, becomes Chaos Kin-Ash if it would otherwise faint and restores to half HP.",
+		onDamagePriority: -100,
+		onDamage(damage, target, source, effect) {
+			if (damage >= target.hp && target.template.speciesid === 'chaoskin') {
+				this.damage(target.hp - 1, target, target);
+				target.formeChange('Chaos Kin-Ash', this.effect, false, '[msg]');
+				this.heal(target.maxhp / 2);
+				return null;
+			}
+		},
+		id: "physicalbreakdown",
+		name: "Physical Breakdown",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
