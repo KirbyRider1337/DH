@@ -460,7 +460,7 @@ exports.BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		onSourceTryHeal(damage, target, source, effect) {
+		onTryHeal(damage, target, source, effect) {
 			this.debug("Heal is occurring: " + target + " <- " + source + " :: " + effect.id);
 			if (effect.id === 'moonlight') {
 				return damage * 1.5;
