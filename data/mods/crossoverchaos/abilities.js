@@ -534,6 +534,21 @@ exports.BattleAbilities = {
 		id: "physicalbreakdown",
 		name: "Physical Breakdown",
 	},
+	"lastditcheffort": {
+		desc: "If this Pokemon is 0, a situation that would cause it to faint instead causes the iris to burst out, changing formes and restoring HP.",
+		shortDesc: "If Zero (Kirby), becomes Zero-Iris if it would otherwise faint and restores to full HP.",
+		onDamagePriority: -100,
+		onDamage(damage, target, source, effect) {
+			if (damage >= target.hp && target.template.speciesid === 'zerokirby') {
+				this.damage(target.hp - 1, target, target);
+				target.formeChange('Zero-Iris', this.effect, false, '[msg]');
+				this.heal(target.maxhp);
+				return null;
+			}
+		},
+		id: "lastditcheffort",
+		name: "Last-Ditch Effort",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
