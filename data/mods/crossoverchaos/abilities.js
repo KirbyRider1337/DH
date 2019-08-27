@@ -578,6 +578,21 @@ exports.BattleAbilities = {
 		id: "eternalbeauty",
 		name: "Eternal Beauty",
 	},
+	"incorporeal": {
+		shortDesc: "This Pokemon's attacks do not make contact with the target. Any moves that otherwise would have 1.2x power.",
+		onModifyMove(move) {
+			if (move.flags['contact']){
+				delete move.flags['contact'];
+				move.incorporealBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.incorporealBoosted) return this.chainModify([0x1333, 0x1000]);
+		},
+		id: "incorporeal",
+		name: "Incorporeal",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
