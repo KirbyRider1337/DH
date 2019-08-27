@@ -605,6 +605,17 @@ exports.BattleAbilities = {
 		id: "supercharge",
 		name: "Supercharge",
 	},
+	"kroganrage": {
+		desc: "This Pokemon's Attack and Speed are both raised by 1 stage if it attacks and knocks out another Pokemon with a Physical attack.",
+		shortDesc: "This Pokemon's Attack and Speed are raised by 1 stage if it attacks and KOes another Pokemon via Physical move.",
+		onSourceFaint(target, source, effect) {
+			if (effect && effect.effectType === 'Move' && effect.category === 'Physical') {
+				this.boost({atk: 1, spe: 1}, source);
+			}
+		},
+		id: "kroganrage",
+		name: "Krogan Rage",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
