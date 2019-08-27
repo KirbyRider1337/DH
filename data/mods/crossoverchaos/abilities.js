@@ -593,6 +593,18 @@ exports.BattleAbilities = {
 		id: "incorporeal",
 		name: "Incorporeal",
 	},
+	"supercharge": {
+		desc: "If this Pokemon is a Creeper and takes damage from an Electric-type Attack, it forme-changes into a Charged Creeper.",
+		shortDesc: "If Creeper, forme-change into Creeper-Charged after taking damage from an Electric-type attack.",
+		onAfterDamageOrder: 1,
+		onAfterDamage(damage, target, source, move) {
+			if (source && source !== target && move && move.type === 'Electric' && target.template.speciesid === 'creeper') {
+				target.formeChange('Creeper-Charged', this.effect, false, '[msg]');
+			}
+		},
+		id: "supercharge",
+		name: "Supercharge",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
