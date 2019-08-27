@@ -1946,7 +1946,7 @@ sectonia: {
 	 gender: "F",
     baseStats: {hp: 80, atk: 125, def: 75, spa: 115, spd: 85, spe: 120},
     abilities: {0: "Queenly Majesty", 1: "Pressure", H: "Levitate"},
-	 heightm: 1,
+	 heightm: 0.9,
     weightkg: 20,
 },
 sectoniadreamstalk: {
@@ -1985,7 +1985,7 @@ sectoniasoulunrooted: {
 	 gender: "F",
     baseStats: {hp: 75, atk: 160, def: 115, spa: 170, spd: 120, spe: 140},
     abilities: {0: "Eternal Beauty"},
-	 heightm: 0.2,
+	 heightm: 0.4,
     weightkg: 5,
 },
 creeper: {
