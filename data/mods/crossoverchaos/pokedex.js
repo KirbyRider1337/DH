@@ -1295,8 +1295,8 @@ galeem: {
 	 gender: "N",
     baseStats: {hp: 100, atk: 40, def: 40, spa: 160, spd: 160, spe: 100},
     abilities: {0: "Bane of Darkness"},
-	 heightm: 5,
-    weightkg: 20,
+	 heightm: 8,
+    weightkg: 66.6,
 },
 isabelle: {
     num: 6000063,
@@ -1315,7 +1315,7 @@ joker: {
     baseStats: {hp: 70, atk: 120, def: 70, spa: 120, spd: 70, spe: 140},
     abilities: {0: "Moxie", 1: "Mold Breaker", H: "Persona Change"},
 	 heightm: 1.76,
-    weightkg: 50,
+    weightkg: 55,
 },
 riki: {
     num: 6000065,
@@ -1891,7 +1891,7 @@ tamamonomaeninetails: {
 },
 knuckles: {
     num: 6000107,
-    species: "Knuckles", /* Fate/EXTRA */
+    species: "Knuckles", /* Sonic the Hedgehog series */
     types: ["Ground", "Fighting"],
 	 gender: "M",
     baseStats: {hp: 85, atk: 135, def: 105, spa: 70, spd: 85, spe: 110},
@@ -2073,8 +2073,8 @@ dharkon: {
 	 gender: "N",
     baseStats: {hp: 97, atk: 142, def: 101, spa: 65, spd: 88, spe: 100},
     abilities: {0: "Bane of Light"},
-	 heightm: 5,
-    weightkg: 200,
+	 heightm: 8,
+    weightkg: 666,
 },
 walle: {
     num: 7000001,
