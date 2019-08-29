@@ -617,20 +617,20 @@ exports.BattleAbilities = {
 		name: "Krogan Rage",
 	},
 	"knightmare": {
-		desc: "This Pokemon's slash-based moves deal x1.33 damage and bypass type-based immunities.",
-		shortDesc: "This Pokemon's slash-based moves deal x1.33 damage and bypass immunities.",
+		desc: "This Pokemon's slash-based moves deal x1.3 damage and bypass type-based immunities.",
+		shortDesc: "This Pokemon's slash-based moves deal x1.3 damage and bypass immunities.",
 		onModifyMovePriority: -1,
 		onModifyMove(move, pokemon) {
-			if (move.type === 'Normal' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
-				move.type = 'Ice';
-				move.refrigerateBoosted = true;
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+				move.ignoreImmunity = true;
+				move.knightmareBoosted = true;
 			}
 		},
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
-			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+			if (move.knightmareBoosted) {
 				this.debug('Knightmare boost');
-				return this.chainModify([0x1333, 0x1000]);
+				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
 		id: "knightmare",
