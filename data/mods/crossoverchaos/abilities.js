@@ -616,6 +616,26 @@ exports.BattleAbilities = {
 		id: "kroganrage",
 		name: "Krogan Rage",
 	},
+	"knightmare": {
+		desc: "This Pokemon's slash-based moves deal x1.33 damage and bypass type-based immunities.",
+		shortDesc: "This Pokemon's slash-based moves deal x1.33 damage and bypass immunities.",
+		onModifyMovePriority: -1,
+		onModifyMove(move, pokemon) {
+			if (move.type === 'Normal' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Ice';
+				move.refrigerateBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+				this.debug('Knightmare boost');
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		id: "knightmare",
+		name: "Knightmare",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
