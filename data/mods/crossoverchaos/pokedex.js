@@ -1079,7 +1079,7 @@ zerokirby: {
     abilities: {0: "Last-Ditch Effort", H: "Levitate"},
 	 heightm: 1.3,
     weightkg: 400,
-	 otherFormes: ["iris0"],
+	 otherFormes: ["zeroiris", "zero2"],
 },
 zeroiris: { //Writing it as "0iris" would've done problems.
     num: 6000048,
@@ -1097,6 +1097,9 @@ zeroiris: { //Writing it as "0iris" would've done problems.
 zero2: {
     num: 6000048,
     species: "Zero^2",
+    baseSpecies: "Zero (Kirby)",
+    forme: "2",
+    formeLetter: "2",
     types: ["Dark", "Poison"],
 	 gender: "N",
     baseStats: {hp: 120, atk: 90, def: 150, spa: 140, spd: 110, spe: 70},
