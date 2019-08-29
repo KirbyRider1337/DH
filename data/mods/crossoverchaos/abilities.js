@@ -636,6 +636,54 @@ exports.BattleAbilities = {
 		id: "knightmare",
 		name: "Knightmare",
 	},
+	"swordofswords": {
+		shortDesc: "This Pokemon deals x1.33 damage with slash-based moves and takes x0.667 damage from slash-based moves.",
+		onModifyMovePriority: -1,
+		onAnyModifyMove(move, pokemon) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+				move.swordOfSwordsBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onAnyBasePower(basePower, attacker, defender, move) {
+			if (move.swordOfSwordsBoosted && [attacker, defender].includes(this.effectData.target)) {
+				this.debug('Sword of Swords - Altering damage taken.');
+				return this.chainModify([((defender === this.effectData.target) ? 0x0AAC : 0x1547), 0x1000]);
+			}
+		},
+		id: "swordofswords",
+		name: "Sword of Swords",
+	},
+	"swordspirit": {
+		shortDesc: "This Pokemon deals x1.5 damage with slash-based moves and takes x0.5 damage from slash-based moves.",
+		onModifyMovePriority: -1,
+		onAnyModifyMove(move, pokemon) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+				move.swordSpiritBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onAnyBasePower(basePower, attacker, defender, move) {
+			if (move.swordSpiritBoosted && [attacker, defender].includes(this.effectData.target)) {
+				this.debug('Sword Spirit - Altering damage taken.');
+				return this.chainModify(((defender === this.effectData.target) ? 0.5 : 1.5));
+			}
+		},
+		id: "swordspirit",
+		name: "Sword Spirit",
+	},
+	"saberclass": {
+		shortDesc: "This Pokemon deals x1.33 damage with slash-based moves.",
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+				this.debug('Saber Class - Boosting Damage.');
+				return this.chainModify([0x1547, 0x1000]);
+			}
+		},
+		id: "saberclass",
+		name: "Saber Class",
+	},
 	
 	//These vanilla abilities are overridden, though mostly just to account for custom elements (For instance, Damp blocking Creeper Blast, etc.)
 	
