@@ -640,7 +640,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon deals x1.33 damage with slash-based moves and takes x0.667 damage from slash-based moves.",
 		onModifyMovePriority: -1,
 		onAnyModifyMove(move, pokemon) {
-			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'gladiusanusblauserium', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
 				move.swordOfSwordsBoosted = true;
 			}
 		},
@@ -658,7 +658,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon deals x1.5 damage with slash-based moves and takes x0.5 damage from slash-based moves.",
 		onModifyMovePriority: -1,
 		onAnyModifyMove(move, pokemon) {
-			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'gladiusanusblauserium', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
 				move.swordSpiritBoosted = true;
 			}
 		},
@@ -676,7 +676,7 @@ exports.BattleAbilities = {
 		shortDesc: "This Pokemon deals x1.33 damage with slash-based moves.",
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
-			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
+			if (['sacredsword', 'leafblade', 'cut', 'nightslash', 'crosspoison', 'slash', 'razorwind', 'airslash', 'furycutter', 'falseswipe', 'psychocut', 'secretsword', 'xscissor', 'swordrainbeta', 'machtornado', 'solarblade', 'invisibleair', 'foilflourish', 'zsaber', 'risingphoenix', 'chargedsaber', 'dashslash', 'greatslash', 'cycloneslash', 'swordofhisou', 'excaliburswordofpromisedvictory', 'gladiusanusblauserium', 'rosaichthys', 'underworldkingslash', 'laevateinn', 'demonicrend'].includes(move.id)) {
 				this.debug('Saber Class - Boosting Damage.');
 				return this.chainModify([0x1547, 0x1000]);
 			}
