@@ -2831,7 +2831,7 @@ let BattleMovedex = {
 		num: 40092,
 		accuracy: 100,
 		basePower: 12,
-		category: "Special",
+		category: "Physical",
 		desc: "Hits nine times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits.",
 		shortDesc: "Hits 9 times in one turn.",
 		id: "ninemoons",
